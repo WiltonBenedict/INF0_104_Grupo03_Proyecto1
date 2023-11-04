@@ -78,6 +78,7 @@
     <Compile Include="Calculadora.aspx.designer.cs">
       <DependentUpon>Calculadora.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Global.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
