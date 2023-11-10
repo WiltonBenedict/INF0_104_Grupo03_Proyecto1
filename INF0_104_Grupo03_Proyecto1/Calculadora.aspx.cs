@@ -10,8 +10,13 @@ namespace INF0_104_Grupo03_Proyecto1
     public partial class Calculadora : System.Web.UI.Page
     {
         //INFO-104. Proyecto 01. Grupo 03.
-        //Instacia de la clase global
-        //Global global = new Global();
+        /*Integrantes
+         * -Jose David Alvarez Vargas-
+         * -Jose Pablo Arroyo Villalta-
+         * -Wilton Ignacio Benedict Castillo-
+         * -Gerardo Jonas Ugarte Navarro-
+         * -Prof: Alexander Benjamin Curling-
+         */
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -78,13 +83,14 @@ namespace INF0_104_Grupo03_Proyecto1
             tDato.Text += "9";
         }
 
+        //METODO IGUAL
         protected void bttIgual_Click(object sender, EventArgs e)
         {
             //Ejemplo
             ValidarControl();
             if (Global.funcion == 1)
             {
-                Global.val2 = Convert.ToDouble(tDato.Text);
+                Global.val2 = double.Parse(tDato.Text);
                 Global.resultado = Global.val1 + Global.val2;
                 tFormula.Text = $"{Global.val1} + {Global.val2}";
                 tDato.Text = $"{Global.resultado}";
@@ -93,8 +99,58 @@ namespace INF0_104_Grupo03_Proyecto1
                 //Si Global.control es true, presionar cualquier otra tecla causara que se borren los datos dentro de los textos para 
                 //iniciar una nueva operacion.
             }
-            //Otras operaciones seguirian con else if
+            else if (Global.funcion == 2)
+            {
+                Global.val2 = double.Parse(tDato.Text);
+                Global.resultado = Global.val1 - Global.val2;
+                tFormula.Text = $"{Global.val1} - {Global.val2}";
+                tDato.Text = $"{Global.resultado}";
+                Global.funcion = 0;
+                Global.control = true;
+            }
+            else if (Global.funcion == 3)
+            {
+                Global.val2 = double.Parse(tDato.Text);
+                Global.resultado = Global.val1 * Global.val2;
+                tFormula.Text = $"{Global.val1} * {Global.val2}";
+                tDato.Text = $"{Global.resultado}";
+                Global.funcion = 0;
+                Global.control = true;
+            }
+            else if (Global.funcion == 4)
+            {
+                Global.val2 = double.Parse(tDato.Text);
+                if (Global.val2 == 0)
+                {
+                    tFormula.Text = "Error. No divisible por cero";
+                }
+                else
+                {
+                    Global.resultado = Global.val1 / Global.val2;
+                    tFormula.Text = $"{Global.val1} / {Global.val2}";
+                    tDato.Text = $"{Global.resultado}";
+                }
+                Global.funcion = 0;
+                Global.control = true;
+            }
+            else if (Global.funcion == 5)
+            {
+                Global.val2 = double.Parse(tDato.Text);
+                Global.resultado = Math.Pow(Global.val1, Global.val2);
+                tFormula.Text = $"{Global.val1} ^ {Global.val2}";
+                tDato.Text = $"{Global.resultado}";
+                Global.funcion = 0;
+                Global.control = true;
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay nada que calcular";
+                Global.control = true;
+            }
+
+
         }
+        
         // OPERACIONES DE DOS VALORES
         protected void bttSuma_Click(object sender, EventArgs e)
         {
@@ -107,12 +163,13 @@ namespace INF0_104_Grupo03_Proyecto1
                 //el label tDato para introducir nuevos datos
                 //y asigna funcion 1 que indica a igual que
                 //la operacion es una suma
-                Global.val1 = Convert.ToDouble(tDato.Text);
+                Global.val1 = double.Parse(tDato.Text);
                 tDato.Text = string.Empty;
-                tConsola.Text = "Suma";
+                tConsola.Text = "+";
             }
             else
             {
+                tConsola.Text = "Error. No hay numeros";
                 //Mensaje de error en consola que no hay datos
             }
         }
@@ -120,37 +177,133 @@ namespace INF0_104_Grupo03_Proyecto1
         protected void bttRest_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.funcion = 2;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "-";
+            }
+            else
+            {
+                tDato.Text = "-";
+            }
         }
 
         protected void bttMult_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.funcion = 3;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "*";
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                Global.control = true;
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         protected void bttDiv_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.funcion = 4;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "/";
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                Global.control = true;
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         protected void bttElevarXY_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.funcion = 5;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "x^n";
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                Global.control = true;
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         //OPERACIONES DE UN VALOR
         protected void bttLog_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.control = true;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "log";
+                Global.resultado = Math.Log(Global.val1);
+                tFormula.Text = $"log({Global.val1})";
+                tDato.Text = Global.resultado.ToString();
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         protected void bttElevar10_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.control = true;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "log";
+                Global.resultado = Math.Pow(10, Global.val1);
+                tFormula.Text = $"10^{Global.val1}";
+                tDato.Text = Global.resultado.ToString();
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         protected void bttRaiz_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.control = true;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "√";
+                Global.resultado = Math.Sqrt(Global.val1);
+                tFormula.Text = $"√{Global.val1}";
+                tDato.Text = Global.resultado.ToString();
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                Global.control = true;
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         protected void bttFactorial_Click(object sender, EventArgs e)
@@ -161,6 +314,21 @@ namespace INF0_104_Grupo03_Proyecto1
         protected void bttElevar2_Click(object sender, EventArgs e)
         {
             ValidarControl();
+            if (tDato.Text.Length > 0)
+            {
+                Global.control = true;
+                Global.val1 = double.Parse(tDato.Text);
+                tDato.Text = string.Empty;
+                tConsola.Text = "x²";
+                Global.resultado = Math.Pow(Global.val1,2);
+                tFormula.Text = $"{Global.val1}²";
+                tDato.Text = Global.resultado.ToString();
+            }
+            else
+            {
+                tConsola.Text = "Error. No hay numeros";
+                //Mensaje de error en consola que no hay datos
+            }
         }
 
         //METODOS DE CONCATENACION
@@ -185,6 +353,7 @@ namespace INF0_104_Grupo03_Proyecto1
             if (tDato.Text.Contains("."))
             {
                 tConsola.Text = "Accion no posible";
+                //Excepcion para prevenir un numero con varios puntos
             }
             else if (tDato.Text.Contains('-') && tDato.Text.Length == 1)
             {
@@ -221,8 +390,22 @@ namespace INF0_104_Grupo03_Proyecto1
         {
             if(Global.control == true)
             {
-                //Se activa solo en caso una operacion ya fue completada.
+                //Se activa solo en caso una operacion ya fue completada y se necesita despejar los campos de texto.
                 ReiniciarVariables();
+            }
+            else if(tDato.Text == "-")
+            {
+                tDato.Text = "-1";
+                //Cuando una calculadora solo detecta "-", lo considera como -1.
+            }
+            else if(tDato.Text == ".")
+            {
+                tDato.Text = "0";
+                //Cuando una calculadora solo detecta ".", lo considera como 0.
+            }
+            else if(tConsola.Text.Length > 0 && Global.funcion == 0)
+            {
+                tConsola.Text = string.Empty;
             }
         }
 
