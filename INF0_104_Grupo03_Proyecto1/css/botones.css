@@ -11,9 +11,8 @@
     transition-duration: 0.4s;
     cursor: pointer;
     font-family: "segoe UI";
+    font-size: 18px;
 }
-
-
 .button1 {
     background-color: white;
     color: black;
@@ -24,7 +23,16 @@
     background-color: #555555;
     color: white;
 }
-td {
-    border-bottom: 1px solid #ddd;
+
+.valores{
+    font-family: "segoe UI";
+    font-size: 28px;
 }
+
+.texto, footer {
+    font-family: "segoe UI";
+    text-align:center;
+}
+
+
 
